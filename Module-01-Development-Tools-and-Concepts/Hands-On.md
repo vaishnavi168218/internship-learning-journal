@@ -36,11 +36,12 @@ Explored Linux directory structure:
 -/
 -/home
 -/mnt/c
+
 6. Windows–Linux File Access
 -Accessed Linux files via Windows Explorer:
 -\\wsl$\Ubuntu
-7. WSL Management & Troubleshooting
 
+7. WSL Management & Troubleshooting
 Learned how to:
 -Uninstall and reinstall Linux distributions
 -Reset WSL if corrupted
@@ -53,6 +54,7 @@ Hands-On Outcome
 -Verified Linux terminal access
 -Completed system updates
 -Gained familiarity with Linux CLI and file system
+
 
 
 
