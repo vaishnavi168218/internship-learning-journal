@@ -1,54 +1,46 @@
-# TDS Bootcamp – Session 1 (04 Jan 2026)
+# TDS Bootcamp – Session 1 (Linux for Data Science)
 
 ## Session Overview
 - **Course:** Tools in Data Science (TDS)
 - **Session:** Bootcamp – Session 1
-- **Focus:** Linux for Data Science
-- **Key Areas:** WSL2 setup, Linux CLI basics, development environment management
+- **Primary Focus:** Linux fundamentals for Data Science
 - **Reference Video:** https://youtu.be/CpN8MjOZ-iI
 
 ---
 
 ## Purpose of the Session
-- Understand why Linux is mandatory for Data Science and MLOps
-- Prepare a Linux-based environment before starting TDS coursework
-- Develop a deployment-first mindset from the beginning
+- Explain the role of Linux in Data Science and MLOps
+- Prepare students with a mandatory Linux environment
+- Introduce a deployment-first approach to problem solving
 
 ---
 
-## Core Concepts Covered
-
-### 1. Why Linux is Mandatory for Data Science
-- Most servers, containers, and production systems run on Linux
-- TDS assignments and evaluations require a Linux environment
-- Windows-only setups lead to compatibility and deployment issues
-- Early Linux exposure reduces future debugging effort
-
----
-
-### 2. Computing Analogy (Car Analogy)
-- Tools must be understood before effective usage
-- Knowing system internals improves troubleshooting skills
-- Focus on fundamentals rather than shortcuts
+## Why Linux is Mandatory
+- Most production systems and servers run on Linux
+- Containers and cloud platforms are Linux-based
+- TDS assignments are designed for Linux environments
+- Windows-only setups cause compatibility and deployment issues
+- Early Linux exposure reduces debugging effort later
 
 ---
 
-### 3. MLOps and Deployment Mindset
-- Deployment should be planned before model training
-- Data science includes more than building models
-- Real-world workflows involve:
+## Deployment-First Mindset
+- Data science is more than training models
+- Deployment should be planned before model development
+- Real-world workflows include:
   - Environment setup
+  - Version control
   - Reproducibility
-  - Deployment and maintenance
+  - Deployment and monitoring
 
 ---
 
-### 4. Environment Choices
+## Environment Options Explained
 - **WSL2 (Windows Subsystem for Linux 2)**
   - Recommended for Windows users
   - Lightweight and well-integrated
 - **Virtual Machines**
-  - Heavier but useful for isolation
+  - Provide isolation but are resource-heavy
 - **Dual Boot**
   - Risky and not recommended
 - **macOS**
@@ -57,25 +49,44 @@
 
 ---
 
-### 5. Hardware and BIOS Requirements
-- Hardware virtualization must be enabled in BIOS
-- Required for:
-  - WSL2
-  - Docker
-  - Virtual Machines
-- Intel VT-x or AMD-V support is mandatory
+## Hardware and BIOS Requirements
+- Hardware virtualization must be enabled
+- Required for WSL2, Docker, and VMs
+- Intel VT-x or AMD-V support is necessary
 
 ---
 
-##  WSL2 and Ubuntu Setup
+## Linux File System Overview
+- Root directory (`/`) is the base of the file system
+- User files are stored under `/home`
+- Windows drives are mounted under `/mnt`
+- Linux paths are case-sensitive
+- Uses forward slashes (`/`) instead of backslashes
 
-### Installation Highlights
-- Installed WSL2 with Ubuntu as the Linux distribution
-- Configured Linux username and password
-- Restarted system to resolve installation issues
+---
 
-### Post-Installation Steps
-- Updated system packages immediately:
-```bash
-sudo apt update
-sudo apt upgrade
+## ⌨️ Command Line Basics
+- Navigation using terminal commands
+- Understanding working directories
+- Use of pipelines to chain commands
+- Importance of CLI for automation and efficiency
+
+---
+
+## Windows and Linux Integration
+- Linux files can be accessed from Windows Explorer
+- WSL provides seamless file sharing between systems
+- Enables smooth development workflow across environments
+
+---
+
+## Troubleshooting and System Management
+- Linux distributions can be uninstalled and reinstalled if corrupted
+- WSL installations can be moved to another drive
+- Export and import options help create backups
+- Restarting the system often resolves setup issues
+
+---
+
+## Session Summary
+This session establishes the foundational importance of Linux, introduces environment choices, and prepares students for production-oriented data science workflows required throughout the TDS course.
