@@ -4,7 +4,7 @@
 - **Course:** Tools in Data Science (TDS)
 - **Session:** Bootcamp – Session 1
 - **Primary Focus:** Linux fundamentals for Data Science
-- **Reference Video:** https://youtu.be/CpN8MjOZ-iI
+- **Reference Video:** (https://youtu.be/B7iHBHCruCc?si=2OkuIVoslibxB6nM)
 
 ---
 
@@ -90,3 +90,4 @@
 
 ## Session Summary
 This session establishes the foundational importance of Linux, introduces environment choices, and prepares students for production-oriented data science workflows required throughout the TDS course.
+
