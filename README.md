@@ -1,8 +1,8 @@
 # Internship Learning Journal  
-**Name:** Your Name  
-**USN:** YOUR USN
-**GitHub Username:** Your GitHub Username  
-**Department:** (CSE-AIML / CSE / ISE)  
+**Name:** Vaishnavi Deshpande 
+**USN:** 2BL22CI061
+**GitHub Username:** vaishnavi168218  
+**Department:** CSE-AIML  
 **Internship Start Date:** 03-02-2026
 
 ---
