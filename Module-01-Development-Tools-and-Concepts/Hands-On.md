@@ -42,15 +42,17 @@ Explored Linux directory structure:
 7. WSL Management & Troubleshooting
 
 Learned how to:
-Uninstall and reinstall Linux distributions
-Reset WSL if corrupted
-Export WSL distributions for backup
-Import distributions when needed
-Move WSL installation to another drive (e.g., D:)
+-Uninstall and reinstall Linux distributions
+-Reset WSL if corrupted
+-Export WSL distributions for backup
+-Import distributions when needed
+-Move WSL installation to another drive (e.g., D:)
+
 Hands-On Outcome
 -Successfully installed WSL2 with Ubuntu
 -Verified Linux terminal access
 -Completed system updates
 -Gained familiarity with Linux CLI and file system
+
 
 
