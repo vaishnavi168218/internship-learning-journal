@@ -1,4 +1,5 @@
-# Hands-On Guide: Installing WSL & Ubuntu on Windows
+
+Installing WSL & Ubuntu on Windows
 
 ## What is WSL?
 WSL (Windows Subsystem for Linux) allows users to run a Linux environment directly on Windows without using virtual machines or dual booting.
