@@ -1,108 +1,105 @@
-Hands-On Guide: Installing WSL & Ubuntu on Windows
-📌 What is WSL?
-WSL (Windows Subsystem for Linux) allows users to run a Linux environment directly on Windows without using virtual machines or dual booting.
-It enables:
--Running Linux commands on Windows
--Using Linux tools alongside Windows apps
--Seamless development workflow
+# Hands-On Guide: Installing WSL & Ubuntu on Windows
 
-System Requirements
-Windows 10 (version 2004+) or Windows 11
-Administrator access
-Internet connection
-🧑‍💻 Step-by-Step Installation of WSL & Ubuntu
-🔹 Step 1: Open Windows PowerShell
-Open PowerShell as Administrator.
+## What is WSL?
+WSL (Windows Subsystem for Linux) allows users to run a Linux environment directly on Windows without using virtual machines or dual booting.
+
+It enables:
+- Running Linux commands on Windows
+- Using Linux tools alongside Windows applications
+- Maintaining a seamless development workflow
+
+---
+
+## System Requirements
+- Windows 10 (version 2004 or later) or Windows 11  
+- Administrator access  
+- Active internet connection  
+
+---
+
+## Step-by-Step Installation of WSL & Ubuntu
+
+### Step 1: Open Windows PowerShell
+Open **PowerShell as Administrator**.
+
 You should see:
 Windows PowerShell
-Copyright (C) Microsoft Corporation. All rights reserved.
-🔹 Step 2: Check Existing WSL Distributions
-Run:
+Copyright (C) Microsoft Corporation.
+All rights reserved.
+
+
+---
+
+### Step 2: Check Existing WSL Distributions
+Run the following command:
+```bash
 wsl --list --verbose
-📌 Output observed:
-NAME            STATE           VERSION
-* Ubuntu          Stopped         2
-  Ubuntu-24.04    Stopped         2
-✔ This shows:
-Multiple Ubuntu distributions installed
-Both running on WSL version 2
-🔹 Step 3: Shut Down All WSL Instances
+Observed output:
+NAME            STATE     VERSION
+Ubuntu          Stopped   2
+Ubuntu-24.04    Stopped   2
+This indicates:
+-Multiple Ubuntu distributions are installed
+-Both are running on WSL version 2
+
+Step 3: Shut Down All WSL Instances
 wsl --shutdown
-✔ This safely stops all running WSL environments.
-🔹 Step 4: Remove Unused Ubuntu Distribution
+This safely stops all running WSL environments.
+
+Step 4: Remove Unused Ubuntu Distribution
 wsl --unregister Ubuntu
-📌 Output:
+Output:
 Unregistering.
 The operation completed successfully.
-✔ This removes the old Ubuntu installation completely.
-🔹 Step 5: Verify Remaining Distributions
+This completely removes the old Ubuntu installation.
+
+Step 5: Verify Remaining Distributions
 wsl --list
-📌 Output:
+Output:
 Windows Subsystem for Linux Distributions:
 Ubuntu-24.04 (Default)
-✔ Ubuntu 24.04 is now the default distribution.
-🔹 Step 6: Ensure WSL 2 is Default
-wsl --set-default-version 2
-📌 Output:
-The operation completed successfully.
-✔ Confirms that all future Linux installations will use WSL 2.
+Ubuntu 24.04 is now set as the default distribution.
 
-🐧 Launch Ubuntu
-Run:
+Step 6: Ensure WSL 2 is the Default Version
+wsl --set-default-version 2
+Output:
+The operation completed successfully.
+This confirms that all future Linux installations will use WSL 2.
+Launching Ubuntu
+Run either of the following commands:
 wsl
 or
 ubuntu
-On first launch:
-You’ll be asked to create:
-Linux username:vaish
-Password
-📂 Understanding File System
-Linux Home:
-/home/username
-Windows Drive Access:
-C: → /mnt/c
-This allows easy file sharing between Windows and Linux.
-🔧 Common Troubleshooting
-❌ Issue: WSL command not found
+On first launch, you will be prompted to create:
+-A Linux username
+-A password
+
+Common Troubleshooting
+Issue: wsl command not found
+
 Fix:
 wsl --install
 Restart the system after installation.
-❌ Issue: Ubuntu not visible in Installed Apps
-✔ Ubuntu can still work via WSL, even if it doesn’t appear as a normal Windows app.
-Use:
+Issue: Ubuntu not visible in Installed Apps
+Ubuntu can still function through WSL even if it does not appear as a standard Windows app.
+Check installed distributions using:
 wsl --list
 
-
 Introduction to Git (Inside Ubuntu)
-🔹 Install Git
+Install Git
 sudo apt update
 sudo apt install git
 
-🔹 Verify Git Installation
+Verify Git Installation
 git --version
 
-🔹 Configure Git
+Configure Git
 git config --global user.name "Your Name"
 git config --global user.email "your-email@example.com"
+This configuration is required for commits and GitHub usage.
 
+Reference Video
+This hands-on setup was performed by following the tutorial below:
+YouTube Link:
+https://youtu.be/RoRy1jKewhA
 
-✔ Required for commits and GitHub usage.
-
-🎥 Reference Video
-
-This hands-on setup was performed by following the tutorial:
-
-🔗 A hands-on guide to installing and setting up Windows Subsystem for Linux (WSL) and Ubuntu, including troubleshooting and an introduction to Git
-📺 YouTube Link:
-https://youtu.be/RoRy1jKewhA?si=WHVhlOx61Q4lQrBt
-
-✅ Key Learnings
--Understood WSL and its purpose
--Installed Ubuntu using WSL 2
--Managed multiple Linux distributions
--Learned basic WSL troubleshooting
-
-Installed and configured Git inside Ubuntu
-
-📌 Conclusion
-WSL with Ubuntu provides a powerful Linux development environment within Windows, making it ideal for data science, development, and version control workflows.
