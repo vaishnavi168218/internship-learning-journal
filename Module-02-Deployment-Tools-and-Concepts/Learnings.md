@@ -1,4 +1,5 @@
-Key Learnings
+##Key Learnings##
+
 -Learned the complete end-to-end backend development workflow.
 
 -Understood how FastAPI processes requests and returns responses.
@@ -26,3 +27,4 @@ Key Learnings
 -Learned automation basics using bash scripts for API testing.
 
 -Improved understanding of professional backend project structure.
+
