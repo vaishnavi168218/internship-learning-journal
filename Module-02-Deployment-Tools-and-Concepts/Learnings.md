@@ -1,68 +1,28 @@
 Key Learnings
-🔹 1️⃣ Understanding FastAPI Architecture
+-Learned the complete end-to-end backend development workflow.
 
-Learned how FastAPI handles client requests and returns responses.
+-Understood how FastAPI processes requests and returns responses.
 
-Understood request → validation → processing → response flow.
+-Built REST APIs using GET and POST methods.
 
-Gained clarity on REST API structure.
+-Implemented path and query parameters effectively.
 
-🔹 2️⃣ Building GET & POST Endpoints
+-Used Pydantic models for structured data validation.
 
-Created GET routes with path parameters.
+-Understood automatic validation and 422 error handling.
 
-Implemented POST routes to accept JSON data.
+-Implemented single and multiple file upload functionality.
 
-Learned difference between required and optional parameters.
+-Tested APIs using Swagger UI and curl commands.
 
-🔹 3️⃣ Data Validation Using Pydantic
+-Gained understanding of HTTP status codes (200, 404, 422).
 
-Defined data models using BaseModel.
+-Learned secure handling of secret keys using environment variables.
 
-Understood automatic validation and error handling.
+-Created a Dockerfile for containerizing the application.
 
-Learned how FastAPI returns 422 errors for invalid input.
+-Understood deployment workflow to cloud platforms like Hugging Face.
 
-🔹 4️⃣ Working with In-Memory Database
+-Learned automation basics using bash scripts for API testing.
 
-Simulated a database using Python dictionaries.
-
-Performed create and read operations.
-
-Understood how backend stores and retrieves data.
-
-🔹 5️⃣ File Upload Handling
-
-Used UploadFile and File() for handling files.
-
-Implemented single file upload endpoint.
-
-Learned importance of python-multipart.
-
-🔹 6️⃣ API Testing
-
-Tested APIs using:
-
-Swagger UI (/docs)
-
-curl commands
-
-Understood HTTP status codes (200, 404, 422).
-
-🔹 7️⃣ Error Handling
-
-Returned custom error messages.
-
-Learned importance of handling missing data.
-
-Understood how proper responses improve API reliability.
-
-🔹 8️⃣ Backend Development Workflow
-
-Setup virtual environment.
-
-Installed dependencies.
-
-Ran server using Uvicorn.
-
-Followed structured development process.
+-Improved understanding of professional backend project structure.
