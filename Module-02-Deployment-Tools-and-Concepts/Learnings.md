@@ -1,31 +1,33 @@
-Key Learning
+ Key Learnings – Containerization with Podman
 
--Learned the complete end-to-end backend development workflow.
+Understood the fundamentals of containerization and why containers solve dependency and environment issues.
 
--Understood how FastAPI processes requests and returns responses.
+Learned the difference between images and containers.
 
--Built REST APIs using GET and POST methods.
+Installed and configured Podman inside WSL.
 
--Implemented path and query parameters effectively.
+Pulled container images from container registries.
 
--Used Pydantic models for structured data validation.
+Ran and managed containers using lifecycle commands (run, stop, start, rm, logs).
 
--Understood automatic validation and 422 error handling.
+Implemented port binding to expose container services to the host machine.
 
--Implemented single and multiple file upload functionality.
+Used volume mounting to persist data outside containers.
 
--Tested APIs using Swagger UI and curl commands.
+Containerized Jupyter Lab and accessed it through the browser.
 
--Gained understanding of HTTP status codes (200, 404, 422).
+Containerized Ollama to run a local LLM inside a container.
 
--Learned secure handling of secret keys using environment variables.
+Pulled and tested a lightweight model (gemma3:270m).
 
--Created a Dockerfile for containerizing the application.
+Created a custom container network for inter-container communication.
 
--Understood deployment workflow to cloud platforms like Hugging Face.
+Enabled API communication between Flask and Ollama containers.
 
--Learned automation basics using bash scripts for API testing.
+Built a Flask web app that interacts with an LLM backend.
 
--Improved understanding of professional backend project structure.
+Understood how container names act as hostnames inside a custom network.
 
+Troubleshot WSL networking issues and learned how to access services using WSL IP.
 
+Gained understanding of multi-container AI application architecture.
