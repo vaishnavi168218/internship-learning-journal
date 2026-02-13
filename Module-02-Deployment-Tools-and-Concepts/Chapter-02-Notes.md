@@ -1,4 +1,4 @@
-# Live Session Notes – Podman, GitHub Pages, FastAPI, Vercel & ngrok
+# Podman, GitHub Pages, FastAPI, Vercel & ngrok
 
 ## Session Overview
 This session covered:
