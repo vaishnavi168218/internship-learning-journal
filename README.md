@@ -23,8 +23,8 @@ Course Link: https://tds.s-anand.net/#/
 | Module | Topics | Status |
 |--------|--------|--------|
 | Module 01 | Foundations | Completed|
-| Module 02 | Tools & Implementation | In Progress  |
-| Module 03 | Project Work | Not Started |
+| Module 02 | Tools & Implementation | Completed  |
+| Module 03 | LLM | On-Going |
 
 
 ---
@@ -39,7 +39,7 @@ Course Link: https://tds.s-anand.net/#/
 
 ## ❓ Doubts / Topics to Revisit
 - Topic 1  covered everything but to learn some more LLMs
-- Topic 2  
+- Topic 2  No Doubts
 
 ---
 
