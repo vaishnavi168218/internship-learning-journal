@@ -1,561 +1,466 @@
-# 🧪 Prompt Experiments 
-## Experiment 1 — First GET Endpoint
+#Git, WSL, Codespaces & GitHub Actions
 
-### What They Did
-Created the most basic FastAPI server with a single root endpoint
-and ran it locally using uvicorn.
+---
 
-### Code
-```python
-# app.py
-from fastapi import FastAPI
+## Experiment 1 — Open WSL Terminal in VS Code
 
-app = FastAPI()
+### What I Did
+Switched from the default PowerShell terminal in VS Code to a WSL
+(Ubuntu) terminal and verified that Git configurations made inside
+WSL are available in the VS Code terminal.
 
-@app.get("/")
-def home():
-    return {"message": "Hello from TDS"}
+### Steps I Followed
+```
+1. Open VS Code
+2. Open Terminal panel (Ctrl + `)
+3. Click the dropdown arrow next to the + icon
+4. Select WSL from the list
+5. A new terminal opens with Ubuntu prompt
 ```
 
+### What I Observed
 ```bash
-# Run the server
-uvicorn app:app --reload
+# WSL terminal prompt looks like this
+username@machine:/mnt/c/Users/you$
+
+# Verify you are in WSL
+uname -a
+# Output: Linux ... (confirms Linux/WSL environment)
+
+# Check current directory
+pwd
 ```
 
-### How They Tested It
-- Opened browser → `http://localhost:8000`
-- Opened Postman → GET → `http://localhost:8000` → Send
-
-### Expected Output
-```json
-{"message": "Hello from TDS"}
+### Key Observation
 ```
----
+PowerShell prompt: PS C:\Users\you>
+WSL prompt:        username@machine:/mnt/c$
 
-## Experiment 2 — Path Parameters
-### Code
-```python
-# In-memory data store
-item_db = {
-    1: {"name": "Apple"},
-    2: {"name": "Banana"},
-    3: {"name": "Pineapple"}
-}
-
-@app.get("/item/{item_id}")
-def get_item(item_id: int):
-    item = item_db.get(item_id)
-    if item:
-        return item
-    return {"error": "Not found"}
+They are completely different environments.
+Git configs set in WSL don't exist in PowerShell and vice versa.
 ```
 
-### Expected URLs
-- Postman → GET → `http://localhost:8000/item/1` → got Apple
-- Postman → GET → `http://localhost:8000/item/2` → got Banana
-- Postman → GET → `http://localhost:8000/item/5` → got Not found
-
-### Expected Output
-```json
-// /item/1
-{"name": "Apple"}
-
-// /item/5
-{"error": "Not found"}
+### Also Installed
 ```
+Extensions → Search "WSL" → Install WSL by Microsoft
+This connects VS Code fully to WSL environment
+
 
 ---
 
-## Experiment 3 — Query Parameters
+## Experiment 2 — Configure Git Inside WSL
 
 ### What They Did
-Created a search endpoint that filters items by name using
-a query parameter. Also demonstrated case-insensitive search
-using `.lower()`.
+Set up Git configuration and SSH key inside WSL terminal so that
+all GitHub operations (clone, push, pull) work without passwords.
 
-### Code
-```python
-@app.get("/search")
-def search_item(q: str):
-    results = []
-    for item in item_db.values():
-        if q.lower() in item["name"].lower():
-            results.append(item)
-    return results
-```
-
-### Tested And Expected URLs
-- `http://localhost:8000/search?q=apple` → returned Apple
-- `http://localhost:8000/search?q=APPLE` → still returned Apple (case insensitive)
-- `http://localhost:8000/search?q=an` → returned Banana and Pineapple (both contain "an")
-
-### Expected Output
-```json
-// ?q=an
-[{"name": "Banana"}, {"name": "Pineapple"}]
-```
-
-
----
-
-## Experiment 4 — Pydantic Response Model
-
-### What They Did
-Defined a Pydantic model with specific fields, then showed that
-even if the function returns extra fields, only the fields defined
-in the response model are sent to the client.
-
-### Code
-```python
-from pydantic import BaseModel
-
-# Response model — only these fields go to the client
-class Item(BaseModel):
-    name: str
-    price: float
-
-@app.get("/product", response_model=Item)
-def get_product():
-    # Returns extra_field too — but it will be stripped
-    return {"name": "Mango", "price": 50.0, "extra_field": "hidden"}
-```
-### Expected Output
-```json
-// extra_field is NOT in Item model — it gets stripped
-{"name": "Mango", "price": 50.0}
-```
-
----
-
-## Experiment 5 — POST Endpoint with Validation
-
-### What They Did
-Created a POST endpoint to register users. First showed a basic
-version, then added Pydantic validation with field constraints
-including minimum username length, email format, and age limit.
-
-### Code — Basic Version
-```python
-users_db = []
-
-@app.post("/users")
-def create_user(user: dict):
-    users_db.append(user)
-    return {"message": "User created", "user": user}
-```
-
-### Code — With Pydantic Validation
-```python
-from pydantic import BaseModel, EmailStr, Field
-
-class UserCreate(BaseModel):
-    username: str = Field(min_length=3, max_length=50)
-    email: EmailStr
-    age: int = Field(lt=120)
-
-users_tds = []
-
-@app.post("/users/advanced")
-def create_user_advanced(user: UserCreate):
-    users_tds.append(user)
-    return {"message": "User created", "user": user.dict()}
-```
-
+### Commands They Ran
 ```bash
-# Install email validator
-pip install pydantic[email]
+# Step 1 — Set Git identity
+git config --global user.name "Your Name"
+git config --global user.email "your@email.com"
+
+# Step 2 — Generate SSH key
+ssh-keygen -t ed25519 -C "your@email.com"
+# Press Enter for all prompts (use defaults)
+
+# Step 3 — View the public key
+cat ~/.ssh/id_ed25519.pub
+# Copy the entire output
 ```
 
-### How To Test With (Postman)
+### Steps on GitHub
 ```
-Method: POST
-URL: http://localhost:8000/users/advanced
-Body → raw → JSON:
+1. Go to github.com → Settings
+2. SSH and GPG Keys → New SSH Key
+3. Title: WSL Machine (or any name)
+4. Paste the public key
+5. Save
+```
 
+### How They Verified It Worked
+```bash
+# Test SSH connection to GitHub
+ssh -T git@github.com
+# Output: Hi username! You've successfully authenticated.
+```
+
+### Key Observation
+```
+One SSH key setup in WSL → works for ALL your GitHub repositories
+You never need to enter a password again for git push/pull
+
+
+---
+
+## Experiment 3 — Virtual Environment in WSL
+
+### What They Did
+Demonstrated that virtual environments created in PowerShell
+(Windows) do NOT work in WSL. Showed the correct way to create
+and activate a virtual environment inside WSL.
+
+
+### What They Did to Fix It
+```bash
+# Inside WSL terminal — delete the broken venv
+rm -rf venv
+
+# Create new venv inside WSL
+python3 -m venv venv
+
+# Activate — WSL/Linux way
+source venv/bin/activate
+
+# Prompt changes to show venv is active
+(venv) username@machine:$
+
+# Reinstall from requirements.txt
+pip install -r requirements.txt
+```
+
+### Key Observation
+```
+Windows venv activation:  venv\Scripts\activate      ← only works in PowerShell
+WSL/Linux venv activation: source venv/bin/activate  ← only works in WSL
+
+Never mix the two.
+
+
+---
+
+## Experiment 4 — Create a GitHub Codespace
+
+### What They Did
+Created a new GitHub repository and launched a Codespace from it,
+showing how a cloud VS Code environment opens in the browser with
+the repo already cloned inside.
+
+### Steps They Followed
+```
+1. Go to github.com → New Repository
+2. Name: codespaces-demo
+3. Visibility: Public
+4. Click Create Repository
+
+5. On the repo page → click green Code button
+6. Go to Codespaces tab
+7. Click Create codespace on main
+8. Select machine type: 2-core (default)
+9. Select region: nearest to you
+10. Wait ~1 minute for environment to spin up
+```
+
+## Experiment 5 — Configure Dev Container
+
+### What They Did
+Created a `.devcontainer` folder with two files — a `Dockerfile`
+and `devcontainer.json` — to define a reproducible cloud development
+environment. Any new Codespace created from this repo automatically
+gets the configured tools and extensions.
+
+### Folder Structure I Created
+```
+codespaces-demo/
+└── .devcontainer/
+    ├── devcontainer.json
+    └── Dockerfile
+```
+
+### devcontainer.json I Used
+```json
 {
-  "username": "sujal",
-  "email": "crab@1223.com",
-  "age": 21
-}
----
-
-## Experiment 6 — Single File Upload
-
-### Code
-```python
-from fastapi import UploadFile, File
-
-@app.post("/upload-file")
-async def upload_file(file: UploadFile = File(...)):
-    contents = await file.read()
-    return {
-        "filename": file.filename,
-        "size": len(contents),
-        "content_preview": contents[:100].decode("utf-8", errors="ignore")
+  "name": "TDS Dev Container",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python",
+        "charliermarsh.ruff"
+      ]
     }
-```
-
-### Test Files Created
-```json
-// cars.json
-{
-  "cars": [
-    {"make": "Toyota", "model": "Camry"},
-    {"make": "Honda", "model": "Civic"}
-  ]
+  },
+  "postCreateCommand": "pip install -r requirements.txt"
 }
 ```
 
-```csv
-// animals.csv
-name,species,age
-Lion,Mammal,5
-Eagle,Bird,3
-Shark,Fish,10
+### Dockerfile We Used
+```dockerfile
+FROM python:3.11
+WORKDIR /app
+COPY requirements.txt .
+RUN pip install -r requirements.txt
 ```
 
-### How To Test With (Postman)
-```
-Method: POST
-URL: http://localhost:8000/upload-file
-Body → form-data
-Key: file    ← must match parameter name exactly
-Type: File   ← change from Text to File in dropdown
-Value: [select cars.json from your computer]
-Click Send
-```
-
-### How They Tested It (curl — faster)
+### How To Committ It
 ```bash
-curl -X POST http://localhost:8000/upload-file \
-  -F "file=@cars.json"
+git add .devcontainer/
+git commit -m "Add dev container config"
+git push
 ```
 
-### Expected Output
+### What Happens When Someone Creates a New Codespace
+```
+GitHub reads .devcontainer/devcontainer.json
+→ Builds image from Dockerfile
+→ Installs Python extensions in VS Code
+→ Runs postCreateCommand (pip install -r requirements.txt)
+→ Environment is ready with everything pre-installed
+→ No manual setup needed by the new developer
+
+---
+
+## Experiment 6 — Multiple Dev Container Configs
+
+### What They Did
+Showed that one repository can have multiple different dev container
+configurations — for example one for developers and one for testers.
+When creating a Codespace, GitHub asks which config to use.
+
+### Folder Structure They Created
+```
+.devcontainer/
+├── devcontainer.json          ← default config (shown first)
+└── g-container.json           ← alternate config for different team
+```
+
+### Second Config I Added (g-container.json)
 ```json
 {
-  "filename": "cars.json",
-  "size": 89,
-  "content_preview": "{\n  \"cars\": [\n    {\"make\": \"Toyota\"..."
+  "name": "Testing Environment",
+  "build": {
+    "dockerfile": "Dockerfile"
+  },
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "ms-python.python"
+      ]
+    }
+  },
+  "postCreateCommand": "pip install pytest"
 }
-
 ---
 
-## Experiment 7 — Multiple File Upload
-### Code
-```python
-from typing import List
-
-@app.post("/upload-files")
-async def upload_files(files: List[UploadFile] = File(...)):
-    file_details = []
-    for file in files:
-        contents = await file.read()
-        file_details.append({
-            "filename": file.filename,
-            "size": len(contents)
-        })
-    return {"files": file_details}
-```
-
-### How To Test With(Postman)
-```
-Method: POST
-URL: http://localhost:8000/upload-files
-Body → form-data
-Key: files   Type: File   Value: cars.json
-Key: files   Type: File   Value: animals.csv
-(add same key "files" twice with different files)
-Click Send
-```
-
-### How They Tested It (curl)
-```bash
-curl -X POST http://localhost:8000/upload-files \
-  -F "files=@cars.json" \
-  -F "files=@animals.csv"
-```
-
-### Expected Output
-```json
-{
-  "files": [
-    {"filename": "cars.json", "size": 89},
-    {"filename": "animals.csv", "size": 45}
-  ]
-}
-
----
-
-## Experiment 8 — Copilot curl Generation
+## Experiment 7 — Deploy FastAPI to Hugging Face
 
 ### What They Did
-Instead of manually constructing curl commands, they described
-the endpoint to Copilot in plain English and got the curl command
-generated instantly. Then saved it to a file for reuse.
+Created a simple FastAPI "Hello World" app, added a Dockerfile,
+pushed it to Hugging Face Spaces, and shared the live URL for
+others in the session to access.
 
-### Prompt They Used in Copilot
-```
-There is an endpoint upload-file.
-Write a curl request that will send cars.json as an attachment.
-```
-
-### What Copilot Generated
-```bash
-curl -X POST http://localhost:8000/upload-file \
-  -F "file=@cars.json"
-```
-
-### Second Prompt for Multiple Files
-```
-There's an endpoint upload-files that will send cars.json
-and animals.csv as attachments.
-```
-
-### What Copilot Generated
-```bash
-curl -X POST http://localhost:8000/upload-files \
-  -F "files=@cars.json" \
-  -F "files=@animals.csv"
-```
-
-### How to Save and Reuse
-```bash
-# Save to a file
-echo 'curl -X POST http://localhost:8000/upload-file -F "file=@cars.json"' > test.txt
-
-# Run anytime
-bash test.txt
-```
-
----
-
-## Experiment 9 — Secret Key from .env
-
-### What They Did
-Moved a sensitive value (secret key) out of the Python code
-and into a `.env` file. Loaded it at runtime and exposed it
-via a GET endpoint to verify it loaded correctly.
-
-### Files Created
-
-**.env**
-```env
-SECRET_KEY=data_science_is_a_very_good_subject
-```
-
-**app.py additions**
-```python
-import os
-from dotenv import load_dotenv
-
-load_dotenv()
-
-SECRET_KEY = os.getenv("SECRET_KEY")
-
-@app.get("/secret")
-def get_secret():
-    return {"key": SECRET_KEY}
-```
-
-```bash
-# Install dotenv
-pip install python-dotenv
-```
-
-### How They Tested It
-```
-Browser or Postman → GET → http://localhost:8000/secret
-```
-
-### Expected Output
-```json
-{"key": "data_science_is_a_very_good_subject"}
-```
-
-### Then Added to Hugging Face Secrets
-```
-Space → Settings → Variables and Secrets → New Secret
-Name:  SECRET_KEY
-Value: tds_is_a_very_good_subject
-Save
-```
-
----
-
-## Experiment 10 — Deploy to Hugging Face
-
-### What They Did
-Created a Dockerfile, uploaded all files to a Hugging Face Space,
-added the secret key via Hugging Face's secrets UI, and verified
-the deployed app was accessible at the public URL.
-
-### Files They Used
+### Files They Created
 
 **requirements.txt**
 ```
 fastapi
 uvicorn
-python-multipart
-python-dotenv
-pydantic[email]
+```
+
+**app.py**
+```python
+from fastapi import FastAPI
+
+app = FastAPI()
+
+@app.get("/")
+def read_root():
+    return {"message": "Hello World"}
 ```
 
 **Dockerfile**
 ```dockerfile
 FROM python:3.11
 
-WORKDIR /app
+RUN useradd -m -u 1000 user
+USER user
+ENV HOME=/home/user \
+    PATH=/home/user/.local/bin:$PATH
 
-COPY requirements.txt .
+WORKDIR $HOME/app
+
+COPY --chown=user requirements.txt .
 RUN pip install --no-cache-dir -r requirements.txt
 
-COPY . .
-
-EXPOSE 7860
+COPY --chown=user . .
 
 CMD ["uvicorn", "app:app", "--host", "0.0.0.0", "--port", "7860"]
 ```
 
-### Steps to be Followed
+### Steps To Be Followed on Hugging Face
 ```
 1. huggingface.co → New Space
-2. Name: fastapi-demo
-3. SDK: Docker
+2. Name: hugging-face-demo
+3. SDK: Docker → Blank template
 4. Hardware: CPU Basic (free)
 5. Visibility: Public
 6. Create Space
 
-7. Files → Add File → Upload Files
-8. Upload: app.py, requirements.txt, Dockerfile
-9. Commit changes
+7. Clone the space locally:
+   git clone https://huggingface.co/spaces/USERNAME/hugging-face-demo
 
-10. Settings → Secrets → New Secret
-11. Name: SECRET_KEY  Value: tds_is_a_very_good_subject
-12. Save
+8. Copy app.py, requirements.txt, Dockerfile into the cloned folder
 
-13. Wait for build to complete
-14. Visit: https://vaishnavi-fastapi-demo.hf.space
-15. Test: https://vaishnavi-fastapi-demo.hf.space/secret
+9. Push:
+   git add .
+   git commit -m "Simple FastAPI app"
+   git push
+   (Username: HF username, Password: HF token)
 ```
 
-### URL
+### How They Generated the HF Token
 ```
-They asked Copilot: "What is the deployed URL for my Hugging Face Space?"
-Copilot returned: https://vaishnavi-spacename.hf.space
+huggingface.co → Settings → Access Tokens → New Token
+Give write access → Copy token → use as password when pushing
 ```
 
+### What We Observed
+```
+After push → Space starts building (takes ~1-2 minutes)
+→ Build logs visible in the Space page
+→ App goes live at: https://USERNAME-hugging-face-demo.hf.space
+→ Visiting the URL returns: {"message": "Hello World"}
+```
 ---
 
-## Experiment 11 — Automated Bash Test Script
+## Experiment 8 — ISS Tracker with GitHub Actions
 
 ### What They Did
-Used Copilot to generate a bash script that tests all endpoints
-automatically. Ran it with one command to verify all endpoints
-pass. Showed how changing one URL variable switches between
-local and production testing.
+Created a GitHub Actions workflow that runs daily at 12 PM UTC,
+fetches the current coordinates of the International Space Station
+from a public API, and saves them to a `.jsonl` file in the repo —
+all automatically without any human involvement.
 
-### Prompt Used in Copilot
+### Folder Structure
 ```
-Create a bash file that checks all the endpoints for this
-[codebase] .ssl bash file
-```
-
-### Script That Was Generated and Used
-```bash
-#!/bin/bash
-
-# Change this one line to switch between local and production
-API_URL="http://localhost:8000"
-# API_URL="https://your-username-fastapi-demo.hf.space"
-
-PASS=0
-FAIL=0
-
-echo "=== Running API Tests ==="
-
-# Test root endpoint
-response=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/)
-if [ "$response" == "200" ]; then
-    echo "✅ GET /              PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ GET /              FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-# Test item by ID
-response=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/item/1)
-if [ "$response" == "200" ]; then
-    echo "✅ GET /item/1        PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ GET /item/1        FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-# Test item not found
-response=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/item/999)
-if [ "$response" == "200" ]; then
-    echo "✅ GET /item/999      PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ GET /item/999      FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-# Test search
-response=$(curl -s -o /dev/null -w "%{http_code}" "$API_URL/search?q=apple")
-if [ "$response" == "200" ]; then
-    echo "✅ GET /search?q=apple PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ GET /search?q=apple FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-# Test secret endpoint
-response=$(curl -s -o /dev/null -w "%{http_code}" $API_URL/secret)
-if [ "$response" == "200" ]; then
-    echo "✅ GET /secret        PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ GET /secret        FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-# Test file upload
-response=$(curl -s -o /dev/null -w "%{http_code}" \
-  -X POST $API_URL/upload-file \
-  -F "file=@cars.json")
-if [ "$response" == "200" ]; then
-    echo "✅ POST /upload-file  PASSED"
-    PASS=$((PASS+1))
-else
-    echo "❌ POST /upload-file  FAILED (HTTP $response)"
-    FAIL=$((FAIL+1))
-fi
-
-echo ""
-echo "=== Results: $((PASS+FAIL)) Total | ✅ $PASS Passed | ❌ $FAIL Failed ==="
+your-repo/
+└── .github/
+    └── workflows/
+        └── test.yml
 ```
 
-### How To Run It
-```bash
-# Make it executable
-chmod +x script.sh
+### Workflow File They Created (test.yml)
+```yaml
+name: ISS Location Tracker
 
-# Run locally
-bash script.sh
+on:
+  schedule:
+    - cron: '0 12 * * *'    # Every day at 12:00 PM UTC
+  workflow_dispatch:          # Allow manual trigger
 
-# Switch to production — just change API_URL at top
-# Then run again
-bash script.sh
+jobs:
+  track:
+    runs-on: ubuntu-latest
+
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+
+      - name: Set up Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.11'
+
+      - name: Install dependencies
+        run: pip install requests
+
+      - name: Fetch ISS location
+        run: |
+          python -c "
+          import requests, json
+          from datetime import datetime
+          r = requests.get('http://api.open-notify.org/iss-now.json').json()
+          entry = {
+            'timestamp': datetime.utcnow().isoformat(),
+            'lat': r['iss_position']['latitude'],
+            'lon': r['iss_position']['longitude']
+          }
+          with open('iss_log.jsonl', 'a') as f:
+              f.write(json.dumps(entry) + '\n')
+          "
+
+      - name: Commit and push results
+        run: |
+          git config user.name "github-actions"
+          git config user.email "actions@github.com"
+          git add iss_log.jsonl
+          git commit -m "Update ISS location" || echo "No changes"
+          git push
 ```
 
-
-
-
-
+### What I Observed After Running
+```
+Actions tab → workflow ran successfully
+→ iss_log.jsonl appeared in the repo (they didn't create it)
+→ File was created BY the GitHub Action itself
+→ Contents looked like:
+  {"timestamp": "2024-10-01T12:00:01", "lat": "23.45", "lon": "78.12"}
 
 ---
+
+## Experiment 9 — Trigger GitHub Action Manually
+
+### What They Did
+Demonstrated the `workflow_dispatch` trigger which allows running
+a workflow manually from the GitHub Actions tab — without needing
+to push code or wait for a scheduled time.
+
+### Steps They Followed
+```
+1. Go to GitHub repo → Actions tab
+2. Click the workflow name on the left sidebar (ISS Location Tracker)
+3. Click Run workflow button (top right of the run list)
+4. Click the green Run workflow button in the dropdown
+5. Watch a new row appear showing the workflow is queued/running
+6. Click on the running workflow → see live logs for each step
+---
+
+## Experiment 10 — GitHub Action on Push
+
+### What We Did
+Modified the workflow trigger from schedule-only to also fire
+on every push to the main branch — demonstrating how CI/CD
+pipelines work in real team projects.
+
+### What They Changed in the YAML
+```yaml
+# Before — only runs on schedule and manual trigger
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+
+# After — also runs on every push to main
+on:
+  schedule:
+    - cron: '0 12 * * *'
+  workflow_dispatch:
+  push:
+    branches:
+      - main
+```
+
+###  CI/CD Use Cases Explaination
+```
+Push trigger use case 1 — Run tests automatically:
+  Developer pushes code → Action runs pytest
+  → All tests pass → merge allowed
+  → Any test fails  → merge blocked
+
+Push trigger use case 2 — Auto deploy:
+  Developer pushes to main → Action deploys to Hugging Face
+  → No manual push to HF needed
+  → One push to GitHub triggers everything
+
+Pull request trigger use case:
+  Someone opens a PR → Action checks code quality
+  → Passes → reviewer is notified
+  → Fails  → author must fix before review
+```
+
+
+
+
+
