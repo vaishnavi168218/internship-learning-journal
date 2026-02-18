@@ -160,4 +160,3 @@ The pattern of "acknowledge immediately, process in background, notify when done
 
 ---
 
-*TDS Session — FastAPI & Project 1 Key Learnings*
