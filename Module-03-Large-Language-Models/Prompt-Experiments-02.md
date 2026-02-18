@@ -1,4 +1,4 @@
-# 🧪 Prompt Experiments 
+# Prompt Experiments 
 ## Experiment 1 — First GET Endpoint
 
 ### What They Did
