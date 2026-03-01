@@ -175,3 +175,194 @@ Applications
 - Forecast comparison
 - Visualization
 - Data storage
+
+# GitHub Actions – Scheduling & Automation
+- Core Learning: GitHub Actions allows automation of workflows based on events such as push, pull request, or schedule (cron).
+- Workflows must be inside `.github/workflows/`
+- YAML syntax is used to define jobs and triggers
+- Cron expressions define time-based execution
+- All schedules run in UTC timezone
+- GitHub does NOT guarantee exact execution timing
+- Cron Format: `Minute Hour Day Month Day-of-week`
+- Example: `*/5 * * * *` → Runs every 5 minutes
+- Insight: Scheduled workflows are not suitable for real-time monitoring due to delays
+- Applications:
+  - Automated deployments
+  - Dependency scanning
+  - Security checks
+  - Monthly reports
+  - Periodic backups
+- Takeaway: Design automation with execution delays in mind
+
+# Screen Scraping with Gemini – Vision-Based Data Extraction
+- Core Learning: Use video frames instead of HTML scraping for structured data extraction
+- Recording at 1 FPS converts video into analyzable images
+- Each frame ~250 tokens
+- JSON mode required for structured output
+- Cost-efficient (1000 frames ≈ few cents)
+- Advantages:
+  - Works on dynamic websites
+  - No DOM parsing required
+  - Handles JS-rendered content
+- Limitations:
+  - Depends on visible content
+  - Not real-time
+  - May skip frames
+- Insight: Shift from code-based scraping → vision-based extraction
+
+# Microsoft MarkItDown – Document Standardization
+- Core Learning: Converts files into Markdown for LLM-friendly processing
+- Why Markdown:
+  - Lightweight
+  - Easy to chunk
+  - Ideal for RAG
+- Modes:
+  - Without LLM → fast parsing
+  - With LLM → OCR + better formatting
+- Applications:
+  - Enterprise document cleaning
+  - Knowledge base creation
+  - Dataset generation
+- Takeaway: Data preprocessing is critical for LLM performance
+
+# Nominatim – Geocoding with OpenStreetMap
+- Core Learning: Converts text locations into structured geographic data
+- Powered by OpenStreetMap
+- Requires `user_agent`
+- Returns structured JSON
+- Extractable:
+  - Latitude / Longitude
+  - Address
+  - Bounding box
+  - Class / Type
+- Applications:
+  - Mapping
+  - Delivery systems
+  - Geo-tagging
+- Takeaway: Text → Geographic intelligence
+
+# Overall Technical Insights
+- Automation enables scalable DevOps workflows
+- Vision-based scraping reduces dependency on HTML parsing
+- Markdown improves LLM pipelines
+- Geocoding enables spatial intelligence
+- Structured outputs (JSON/Markdown) are essential
+- Data preprocessing directly impacts AI performance
+
+# DocSearch Scraping Tutorial
+
+## Semantic vs Keyword Search
+- Keyword search → exact match
+- Semantic search → meaning via embeddings
+- Enables intelligent search systems
+
+## Caching Strategy
+- Save HTML locally
+- Avoid repeated downloads
+- Faster debugging
+- Resume-safe scraping
+- Pattern:
+  - If exists → load
+  - Else → fetch + save
+
+## Scraping Workflow
+- Extract archive URLs
+- Collect article links
+- Deduplicate
+- Fetch content
+- Parse data
+- Store output
+- Principle: Small steps > complex logic
+
+## XPath Usage
+- Use DevTools for inspection
+- Target stable containers
+- Use `contains()` instead of exact matches
+
+## Debugging Techniques
+- Print variables frequently
+- Use breakpoints
+- Rubber duck debugging
+
+## Using LLMs Effectively
+- Ask specific questions
+- Mention tools/libraries
+- Request concise code
+
+## Proof of Concept
+- Working demos > presentations
+- Faster validation and deployment
+
+## Incremental Saving
+- Save JSON inside loop
+- Prevent data loss
+- Enable early inspection
+
+## Edge Case Handling
+- Redirects
+- Empty responses
+- Deduplication issues
+- Imperfect HTML
+
+## Insight
+- Rapid prototyping creates advantage
+- Small projects → big opportunities
+
+# Scraping PDFs
+
+## Extracting PDFs
+- Use BeautifulSoup
+- Filter `.pdf` links
+- Extract filenames via `split("/")[-1]`
+
+## File Handling
+- Create directories
+- Save in binary mode
+- Automate downloads
+
+## Table Extraction
+- Use Tabula
+- `read_pdf()` for reading
+- `convert_into()` for CSV
+
+## Issues Faced
+- Incorrect table detection
+- Layout misinterpretation
+- Extra content included
+
+## Solution
+- Use `area=[top, left, bottom, right]`
+- Restrict extraction region
+
+## Key Learnings
+- Layout matters in PDFs
+- Always inspect extracted data
+- Fine-tuning improves accuracy
+
+## Workflow
+- Webpage → PDF → Table extraction → Cleaning → CSV
+
+# Vibe Coding
+
+## Core Concepts
+- Idea-first development
+- AI-assisted rapid prototyping
+- Prompt-driven coding
+
+## Technical Learnings
+- API integration in Python
+- JSON handling
+- Secure API key management
+- Scalable project structure
+- Debugging AI-generated code
+
+## Practical Skills
+- Product-oriented thinking
+- Breaking problems into modules
+- Faster development workflows
+- Writing maintainable code
+
+## Outcome
+- Improved confidence in building applications
+- Better understanding of AI-assisted development
+- Stronger problem-solving and logical thinking
