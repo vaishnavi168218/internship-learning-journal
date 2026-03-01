@@ -291,3 +291,282 @@ Nature of Data
 - Backend development  
 - AI-assisted coding workflows  
 
+# Advanced Topics and Technical Notes
+
+--------------------------------------------------
+
+## GitHub Actions – Scheduled Workflows
+
+### Folder Structure
+project-root/
+│
+└── .github/
+    └── workflows/
+        └── main.yml
+
+- GitHub detects workflows ONLY inside `.github/workflows/`
+
+### Example Workflow (main.yml)
+name: Scheduled Workflow
+
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "*/5 * * * *"
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Running scheduled workflow"
+
+### Cron Format
+- Minute (0–59)
+- Hour (0–23)
+- Day of month (1–31)
+- Month (1–12)
+- Day of week (0–7)
+
+Example:
+0 8 1 * * → Runs at 8 AM on 1st of every month (UTC)
+
+### Environment
+- GitHub-hosted Ubuntu VM
+- YAML configuration
+- UTC timezone
+- Execution time not exact
+
+### Use Cases
+- Automated deployments
+- Security scans
+- Vulnerability checks
+- Periodic reports
+
+--------------------------------------------------
+
+## Screen Scraping with Gemini (Vision-Based)
+
+### Concept
+- Capture screen → extract data using AI (no HTML parsing)
+
+### Files Used
+- screen_recording.mp4
+- JSON output
+
+### Recording Settings
+- 1 frame per second
+- Scroll once per second
+- Short MP4 recordings
+
+### Platform
+- Google AI Studio (Gemini Flash)
+
+### Prompt Example
+"Extract all information in these tweets as JSON."
+
+### Example Output
+[
+  {
+    "username": "example_user",
+    "handle": "@example",
+    "text": "Sample tweet",
+    "likes": 120
+  }
+]
+
+### Cost Estimation
+- ~250 tokens/image
+- ~0.075 USD per 1M tokens
+- Example: 4750 tokens ≈ very low cost
+
+### Advantages
+- No HTML parsing
+- No Selenium
+- Works on dynamic content
+
+### Limitations
+- May skip frames
+- Not real-time
+- Depends on visible data
+- Needs good prompts
+
+--------------------------------------------------
+
+## Microsoft MarkItDown
+
+### Purpose
+- Convert files into Markdown for LLM/RAG pipelines
+
+### Installation
+pip install markitdown
+
+### Supported Formats
+- PDF, DOCX, XLSX, PPT
+- Images (OCR)
+- HTML, XML, JSON, CSV
+- ZIP, Audio
+
+### Basic Usage
+from markitdown import MarkItDown
+
+md = MarkItDown()
+result = md.convert("file.pdf")
+print(result.text_content)
+
+### With LLM
+from markitdown import MarkItDown
+from openai import OpenAI
+
+client = OpenAI()
+
+md = MarkItDown(llm_client=client, llm_model="gpt-4o")
+result = md.convert("image.png")
+print(result.text_content)
+
+### CLI
+markitdown file.pdf
+cat file.pdf | markitdown
+
+### Use Cases
+- RAG pipelines
+- PDF cleaning
+- Knowledge base conversion
+- Dataset creation
+
+### Insight
+Unstructured → Markdown → Better LLM performance
+
+--------------------------------------------------
+
+## Nominatim – OpenStreetMap Geocoding
+
+### Purpose
+- Convert address → coordinates + metadata
+
+### Installation
+pip install geopy
+
+### Example
+from geopy.geocoders import Nominatim
+
+locator = Nominatim(user_agent="my_geocoder")
+location = locator.geocode("Eiffel Tower")
+
+print(location.latitude)
+print(location.longitude)
+print(location.address)
+print(location.raw)
+
+### Output Fields
+- Latitude / Longitude
+- Address
+- Bounding box
+- Class / Type
+
+### Example
+Input: IIT Madras  
+Output: Coordinates + full address + classification
+
+### Applications
+- Geo analytics
+- Delivery optimization
+- Mapping systems
+
+### Notes
+- Free and open-source
+- Rate limited
+- Needs user_agent
+
+--------------------------------------------------
+
+## Overall Technical Takeaways
+- Automation using cron workflows
+- Vision-based scraping as alternative
+- Markdown improves LLM pipelines
+- Geocoding converts text → geo data
+- Data preprocessing is critical
+- Structured outputs (JSON/Markdown) are essential
+
+--------------------------------------------------
+
+## DocSearch Scraping Tutorial
+
+### Files
+1. scrape2.py → Main scraping script  
+2. cache2/ → Cached HTML files  
+3. urls2.txt → Stored URLs  
+4. scraped2.json → Final output  
+5. scraped2.csv → Optional CSV  
+
+### Libraries
+- httpx → HTTP requests  
+- lxml → HTML parsing  
+- tqdm → Progress bar  
+- hashlib → Caching  
+- os → File handling  
+- json → Data storage  
+- pandas → CSV export  
+
+### Website
+- Insider Intelligence archive  
+- ~369 pages  
+- ~7000 articles  
+
+### Workflow
+- Loop archive pages  
+- Extract article links  
+- Deduplicate  
+- Scrape content  
+- Save JSON  
+
+--------------------------------------------------
+
+## Scraping PDFs
+
+### Files
+- 25–30 PDF files (Premier League)
+- pl_interactive_combine.pdf
+- table_output.csv
+
+### Libraries
+- BeautifulSoup → HTML parsing  
+- requests → Download PDFs  
+- tabula → Extract tables  
+- pandas → Data handling  
+
+### Workflow
+- Parse webpage  
+- Extract PDF links  
+- Download files  
+- Extract tables  
+- Convert to CSV  
+
+--------------------------------------------------
+
+## Vibe Coding
+
+### Files
+- main.py → Core logic  
+- requirements.txt → Dependencies  
+- .env → Environment variables  
+- README.md → Documentation  
+
+### APIs
+- OpenAI API → AI assistance  
+- REST APIs → GET/POST handling  
+- GitHub API → Automation concepts  
+
+### Tools
+- VS Code  
+- GitHub  
+- Postman  
+- Python  
+- AI coding assistants  
+
+### Purpose
+- API integration  
+- Backend development  
+- AI-assisted workflows  
