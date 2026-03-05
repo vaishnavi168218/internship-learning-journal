@@ -1,426 +1,561 @@
-# Data Extraction & Web Scraping Projects
+# Files and APIs
 
+## Topic: Getting Data by Scraping with Excel (From Web)
 
---------------------------------------------------
+### Type of Source
+- Web Source (Public Website)
+- Structured HTML Table Data
+- Live Connected Data Source
 
-1. Web Scraping Using Excel
-
-Source Type
-- Public Website
-- Structured HTML Table
-- Live Data Connection
-
-Tools Used
+### Tool Used
 - Microsoft Excel
 - Power Query (Get & Transform)
+- Data → Get Data → From Web
 
-Data Source
-- Website: https://www.timeanddate.com/weather/
-- Example: Two Week Weather Forecast – Chennai
+### Data Source Used
+Website: https://www.timeanddate.com/weather/  
+Example: Two Week Weather Forecast – Chennai
 
-Workflow
-- Connected Excel to website using Data → Get Data → From Web
-- Extracted structured table data
-- Loaded data into Excel as a query
-- Transformed data using Power Query Editor
+### What Was Done
+- Connected Excel to a live website using From Web query
+- Extracted structured table data (2-week forecast)
+- Loaded data into Excel as a connected query
+- Edited and transformed data inside Query Editor
 - Removed unnecessary columns
 - Created a refreshable data connection
 
-Key Concepts
+### Key Concepts Covered
 - Web scraping using Excel
 - Query Editor
 - Table View vs Web View
 - Applied Steps tracking
 - Data transformation
+- Refreshable live data connection
 
-Key Feature
-- The dataset remains connected to the website
-- Using Refresh updates the data automatically
+### Important Feature
+The imported table remains connected to the website. Using **Refresh**, Excel fetches the latest updated data.
 
---------------------------------------------------
+---
 
-2. IMDB Data Scraping Using Python
+# Topic: Scraping Data from IMDB using Python
 
-Source Type
+### Type of Source
 - Public Website
-- Static HTML Data
+- HTML Structured Data
+- Static Web Page
 
-Libraries Used
+### Tools & Libraries Used
 - Python
+- Jupyter Notebook
 - requests
 - BeautifulSoup (bs4)
 - pandas
 
-Objective
-- Extract Movie Title, Release Year, and IMDB Rating from IMDB
+### Purpose of the Exercise
+To scrape the **Top Rated Movies list from IMDB** and convert:
 
-Workflow
+- Movie Title
+- Release Year
+- IMDB Rating
 
-1. Import Libraries
-import requests
-from bs4 import BeautifulSoup
-import pandas as pd
+into structured tabular format using Python.
 
-2. Fetch Webpage
-response = requests.get(URL)
+### Technical Workflow
 
-3. Parse HTML
-soup = BeautifulSoup(response.content, "html.parser")
+Import required libraries:
 
-4. Extract Data
-- Title: a.text
-- Year: span.text
-- Rating: strong.text
+- requests → Access webpage  
+- BeautifulSoup → Parse HTML  
+- pandas → Create DataFrame  
 
-5. Store Data
-- Save into lists
-- Convert into pandas DataFrame
+Steps:
 
-Output
-- Structured table containing Title, Year, Rating
+1. Load webpage content using requests.
+2. Convert HTML content into BeautifulSoup object.
+3. Inspect webpage elements using:
+   - Right click → Inspect
+   - Identify HTML tags and classes
+4. Extract data using:
 
---------------------------------------------------
+Higher level tag:  
+`chart full-width`
 
-3. Data Extraction Using Wikipedia Library
+Title & Year:  
+`titleColumn`
 
-Source Type
+Rating:  
+`ratingColumn imdbRating`
+
+Extraction methods:
+
+- Title extraction → `a.text`
+- Year extraction → `span.text`
+- Rating extraction → `strong.text`
+
+5. Store extracted data into lists.
+6. Convert lists into a pandas DataFrame.
+7. Display the table.
+
+### Output
+A structured DataFrame containing:
+
+- Movie Title
+- Year
+- Rating
+
+---
+
+# Topic: Extracting Data Using the Wikipedia Python Library
+
+### Type of Source
+- Public Knowledge Base
 - Wikipedia Articles
-- Structured and Semi-Structured Data
+- Structured & Semi-Structured Web Data
 
-Libraries Used
+### Tools & Libraries Used
 - Python
-- wikipedia
+- wikipedia (Python library)
 - pandas
+- Jupyter Notebook
 
-Installation
+### Installation
+
+```bash
 pip install wikipedia
+```
 
-Objective
-- Extract structured data without manual HTML scraping
+### Purpose of the Exercise
 
-Functionalities
-- Search: wikipedia.search()
-- Summary: wikipedia.summary()
-- Full Page: wikipedia.page()
-- URL: page.url
-- Images: page.images
-- References: page.references
+To extract structured information directly from Wikipedia using the **wikipedia Python library** instead of manually scraping HTML.
 
-Table Extraction
-import pandas as pd
-tables = pd.read_html(page.html())
+### Functionalities Used
 
-Advantage
+Search for keyword:
+```
+wikipedia.search()
+```
+
+Get article summary:
+```
+wikipedia.summary()
+```
+
+Limited summary using:
+```
+sentences argument
+```
+
+Get full page:
+```
+wikipedia.page()
+```
+
+Extract:
+
+- URL → `page.url`
+- References → `page.references`
+- Images → `page.images`
+
+Extract tables from page:
+
+Use page HTML and:
+
+```
+pandas.read_html()
+```
+
+Select required table index.
+
+### Key Advantage
+
+Using the Wikipedia library simplifies data extraction:
+
 - No manual HTML parsing
-- No BeautifulSoup required
-- Direct structured data access
+- No need for BeautifulSoup
+- Direct access to structured page elements
 
---------------------------------------------------
+---
 
-4. BBC Weather Data Scraping
+# Topic: Scraping BBC Weather Data using Python
 
-Source Type
+### Type of Source
 - Public Website
 - Dynamic Weather Data
+- HTML Structured Data
 
-Libraries Used
+### Libraries Used
 - Python
 - requests
-- BeautifulSoup
+- BeautifulSoup (bs4)
 - pandas
-- re
+- re (Regular Expressions)
 - datetime
 
-Objective
-- Scrape 14-day weather forecast data for Mumbai
+### Purpose of the Exercise
 
-Data Extracted
-- High Temperature (°C)
-- Low Temperature (°C)
-- Weather Summary
+To scrape **14-day weather forecast data for Mumbai from BBC Weather** and store it in:
+
+- pandas DataFrame
+- CSV file
+- Excel file
+
+### Data Extracted
+
+- Daily High Temperature (°C)
+- Daily Low Temperature (°C)
+- Daily Weather Summary
 - Date
 
-Workflow
+### Technical Workflow
 
-1. Fetch Data
+Fetch HTML page using:
+
+```
 requests.get(URL)
+```
 
-2. Parse HTML
+Parse HTML using:
+
+```
 BeautifulSoup(response.content, "html.parser")
+```
 
-3. Extract Elements
-- High Temp: day-temperature-high
-- Low Temp: day-temperature-low
-- Summary: span elements
+Inspect webpage elements to locate:
 
-4. Data Cleaning
-- Remove unwanted text
-- Convert temperature values
-- Use regex for formatting
+- High temp → `day-temperature-high`
+- Low temp → `day-temperature-low`
+- Summary → Specific span blocks
 
-5. Create Date Range
-pd.date_range()
+Use:
 
-6. Save Data
-df.to_csv()
-df.to_excel()
+```
+find_all()
+```
 
-# References and Resources
+List processing to clean unwanted text.
 
---------------------------------------------------
+String split to remove Fahrenheit values.
 
-## GitHub Actions
-- GitHub Actions Documentation: https://docs.github.com/en/actions
-- Workflow Syntax: https://docs.github.com/en/actions/using-workflows/workflow-syntax-for-github-actions
-- Schedule Event: https://docs.github.com/en/actions/using-workflows/events-that-trigger-workflows#schedule
-- Cron Expression Builder: https://crontab.guru/
-- GitHub Status Page: https://www.githubstatus.com/
+Regular expressions to split long summary string.
 
---------------------------------------------------
+Generate date column using:
 
-DocSearch Scraping Tutorial
+```
+pandas.date_range()
+```
 
-Files Created
+Create DataFrame using:
 
-1. scrape2.py
-Main Python script used to:
+```
+pandas.DataFrame()
+```
 
-Iterate through archive pages
-Extract article URLs
-Scrape individual article content
-Save structured output
+Clean degree symbol and convert to float.
 
-2. cache2/ (Directory)
-Stores cached HTML responses
-Uses MD5 hash of URLs as filenames
-Prevents repeated downloads during development
+Save output as:
 
-3. urls2.txt
-Stores extracted article URLs
-Allows resuming scraping without repeating archive parsing
+- `.csv`
+- `.xlsx`
 
-4. scraped2.json
-Final structured output
-Contains:
-title
-body content
+### Important Notes
 
-5. scraped2.csv (Optional)
-Alternative export using pandas
-Tabular representation of scraped content
+Web scraping may not always be legally permitted.  
+Always check website terms and conditions before scraping.
 
-Python Libraries Used
+---
 
-1. httpx
-Used instead of requests
-Supports async (if needed later)
-Allows redirect handling
-Used with:
+# GitHub Actions – Scheduled Workflows
 
-follow_redirects=True
-raise_for_status()
+### Required Folder Structure
 
-2. lxml.html
-Used for fast and standards-compliant HTML parsing
-Used XPath expressions for content extraction
+```
+project-root/
+│
+└── .github/
+    └── workflows/
+        └── main.yml
+```
 
-3. tqdm
-Displays progress bar while iterating pages
+GitHub **ONLY detects workflow files inside `.github/workflows/`**.
 
-4. hashlib
-Used MD5 hashing for safe cache filenames
+### Example Workflow File (main.yml)
 
-5. os
-Directory creation
-File existence checks
-Path handling
+```yaml
+name: Scheduled Workflow
 
-6. json
-Saving structured scraped data
+on:
+  push:
+    branches:
+      - main
+  schedule:
+    - cron: "*/5 * * * *"
 
-7. pandas (optional)
-Exporting results to CSV
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+      - run: echo "Running scheduled workflow"
+```
 
-Website Scraped
+### Cron Format
 
-Insider Intelligence archive
-~369 archive pages
-~7000 articles scraped
-Structure:
+```
+| | | | |
+| | | | └── Day of week (0-7)
+| | | └──── Month (1-12)
+| | └────── Day of month (1-31)
+| └──────── Hour (0-23)
+└────────── Minute (0-59)
+```
 
-Archive pages list article links
+Example:
 
-Each article page contains:
+```
+0 8 1 * *
+```
 
-Title (H1 with specific class)
-Body content (within structured div containers)
+Runs at **8 AM on the 1st of every month (UTC)**.
 
-Architecture Flow
+### Environment
 
-Loop through archive pages (archive/1 → archive/n)
-Extract links containing /content/
-Deduplicate links using set
-Loop through article URLs
-Fetch content using cached_get()
-Parse title and body via XPath
-Store structured results
-Save JSON incrementally
+- GitHub-hosted Ubuntu VM
+- YAML configuration
+- UTC timezone
+- Execution time not guaranteed exactly
 
-Scraping PDFs
+### Use Cases
 
-Files Created
+- Automated deployments
+- Security scans
+- Vulnerability checks
+- Periodic reports
 
-1. Downloaded PDF Files
-Source: Premier League publications webpage
-Approximately 25–30 PDF documents
-Stored in:
+---
 
-Local folder (e.g., ./premier_league/)
-Or Google Drive (if using Colab)
+# Screen Scraping with Gemini (Vision-Based Scraping)
 
-Examples:
+### Concept
 
-Premier League Handbook 2021-22.pdf
-Premier League 2 Handbook.pdf
-Fixtures PDF
-Season Preview PDFs
+Instead of scraping HTML using code, record the screen and let Gemini extract structured data from frames.
 
-2. pl_interactive_combine.pdf
-Selected PDF for table extraction
-Contains ~19 pages
-Page 18 contains final league standings table
+### Files Used
 
-3. table_output.csv
-Structured CSV extracted from page 18
-Generated using tabula.convert_into()
-Contains:
+- screen_recording.mp4
+- JSON output generated by Gemini
 
-Team name
-Final standings
-Additional parsed table columns
+### Recording Settings
 
-Python Libraries Used
+- 1 frame per second
+- Scroll once per second
+- Save short MP4
 
-1. BeautifulSoup (bs4)
-Purpose:
+Platform Used:
 
-Parse HTML of webpage
-Extract anchor tags
-Filter links ending with ".pdf"
-Used with:
+**Google AI Studio (Gemini Flash model)**
 
-HTML parser
-find_all('a')
+### Prompt Example
 
-2. requests (implicitly used)
-Purpose:
+```
+Extract all information in these tweets as JSON.
+```
 
-Download PDF files
-Write binary content to disk
+### Example Output
 
-3. tabula
-Purpose:
+```json
+[
+  {
+    "username": "example_user",
+    "handle": "@example",
+    "text": "Sample tweet",
+    "likes": 120
+  }
+]
+```
 
-Read tables from PDFs
-Convert extracted tables into DataFrame
-Export directly to CSV
-Important Functions:
+### Cost Estimation
 
-read_pdf()
-convert_into()
-Parameters Used:
+~250 tokens per image  
+$0.075 per 1M tokens
 
-pages=18
-pages="all"
-area=[top, left, bottom, right]
-output_format="csv"
+Example:
 
-pandas (optional)
-Purpose:
+19 frames × 250 tokens = 4750 tokens  
+Cost ≈ 0.04 cents
 
-Store extracted tables
-Inspect DataFrame before saving
+### Advantages
 
-Website Used
+- No HTML parsing
+- No Selenium required
+- Works visually
+- Handles dynamic web apps
 
-Premier League Publications Page:
+### Limitations
 
-Multiple season handbooks
-Fixtures PDFs
-League documentation
+- May skip frames
+- Not real-time
+- Depends on visible content
+- Requires good prompt formatting
 
-Workflow Architecture
+---
 
-Step 1:
+# Microsoft MarkItDown – File to Markdown Conversion
 
-Parse webpage using BeautifulSoup
+### Purpose
 
-Step 2:
+Convert multiple document types into clean **Markdown format** for LLM pipelines, indexing, and RAG systems.
 
-Extract all links ending with ".pdf"
+### Installation
 
-Step 3:
+```bash
+pip install markitdown
+```
 
-Generate filename using: link.split("/")[-1]
+### Supported Formats
 
-Step 4:
+- PDF
+- Word (.docx)
+- Excel (.xlsx)
+- PowerPoint
+- Images (OCR)
+- HTML
+- XML
+- JSON
+- CSV
+- ZIP
+- Audio files
 
-Download each PDF and store locally
+### Basic Usage (Without LLM)
 
-Step 5:
+```python
+from markitdown import MarkItDown
 
-Use tabula.read_pdf() to extract tables
+md = MarkItDown()
+result = md.convert("file.pdf")
+print(result.text_content)
+```
 
-Step 6:
+### With LLM (OCR)
 
-Refine extraction using:
-Specific page number
-area parameter
+```python
+from markitdown import MarkItDown
+from openai import OpenAI
 
-Step 7:
+client = OpenAI()
 
-Convert cleaned table into CSV
+md = MarkItDown(llm_client=client, llm_model="gpt-4o")
+result = md.convert("image.png")
 
-Vibe Coding
+print(result.text_content)
+```
 
-Files
+### CLI Usage
 
-1. main.py
-Core application file where the primary logic of the project was implemented. It handled user input, API calls, and output rendering.
+```
+markitdown file.pdf
+```
 
-2. requirements.txt
-Contained all required Python dependencies such as:
+Using pipe:
 
-requests
-fastapi / flask (for backend handling)
-openai (for AI-assisted coding, if used)
-pandas (for data handling)
+```
+cat file.pdf | markitdown
+```
 
-3. .env
-Stored environment variables such as API keys and configuration settings securely.
+### Use Cases
 
-4. README.md
-Documented project overview, setup instructions, and usage steps.
+- Preparing documents for RAG
+- Cleaning enterprise PDFs
+- Converting Excel knowledge bases
+- Standardizing document formats
+- Dataset generation
 
-APIs Used
+### Key Insight
 
-1. OpenAI API
-Used for AI-assisted code generation, prompt-based responses, and automation support.
+Unstructured documents → Structured Markdown → Better LLM performance
 
-2. REST APIs
-Demonstrated how to:
+---
 
-Send GET and POST requests
-Handle JSON responses
-Integrate third-party services into applications
+# Nominatim – OpenStreetMap Geocoding API
 
-3. GitHub API (Conceptual Demonstration)
-Showed how repositories, commits, and automation workflows can be managed programmatically.
+### Purpose
 
-Tools & Platforms
+Convert text addresses into geographic coordinates and structured location data.
 
-VS Code
-GitHub
-Postman (for API testing)
-Python
-AI coding assistants get in git style to upload
+### Installation
+
+```bash
+pip install geopy
+```
+
+### Python Example
+
+```python
+from geopy.geocoders import Nominatim
+
+locator = Nominatim(user_agent="my_geocoder")
+location = locator.geocode("Eiffel Tower")
+
+print(location.latitude)
+print(location.longitude)
+print(location.address)
+print(location.raw)
+```
+
+### Example JSON Structure
+
+```json
+{
+ "lat": "48.8582602",
+ "lon": "2.2944991",
+ "display_name": "Eiffel Tower, Paris, France",
+ "class": "tourism",
+ "type": "attraction",
+ "boundingbox": [...]
+}
+```
+
+### Extractable Fields
+
+- Latitude
+- Longitude
+- Full formatted address
+- Bounding box
+- Class (tourism, amenity)
+- Type (attraction, university)
+
+Example:
+
+Input: **IIT Madras**
+
+Output:
+
+- Coordinates
+- Full address with pincode
+- Class: amenity
+- Type: university
+
+### Applications
+
+- Location-based analytics
+- Delivery optimization
+- Geo-tagging datasets
+- Urban planning
+- Mapping systems
+
+### Important Notes
+
+- Free & open-source
+- Rate limited
+- Requires user_agent parameter
+- Alternative to Google Maps Geocoding API
+
+---
+
+# OVERALL TECHNICAL TAKEAWAYS
+
+- Automation can be scheduled using GitHub cron workflows.
+- Vision-based scraping is an alternative to HTML scraping.
+- Converting documents to Markdown improves LLM pipeline quality.
+- Geocoding converts unstructured text into structured geographic intelligence.
+- Data preprocessing is critical for AI/ML applications.
+- Structured output (JSON / Markdown) is essential for scalable systems.
