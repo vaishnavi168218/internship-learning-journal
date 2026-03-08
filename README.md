@@ -24,6 +24,9 @@ Course Link: https://tds.s-anand.net/#/
 | Module 01 | Foundations | Completed|
 | Module 02 | FastAPI, Deployment, API Workflows | Completed  |
 | Module 03 | LLMs, Embeddings, Vector Databases, Multimodal APIs | Completed |
+| Module 04 | Data Sourcing | Completed |
+| Module 05 | Data preparation | Completed |
+
 
 
 ---
