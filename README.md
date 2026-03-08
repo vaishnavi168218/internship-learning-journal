@@ -89,14 +89,53 @@ Course Link: https://tds.s-anand.net/#/
 - Understood schema definitions for reliable responses  
 
 ---
+##  Week 4 Highlights
+
+- Learned the **fundamentals of web scraping** and how to collect data from websites.
+- Explored the **structure of HTML pages**, including tags, classes, and IDs.
+- Extracted data from websites using **Python libraries such as Requests and BeautifulSoup**.
+- Practiced **parsing and cleaning HTML content** for further analysis.
+- Scraped **structured information like tables** from webpages.
+- Implemented techniques for **handling pagination and dynamic website content**.
+- Downloaded and processed **data available in PDF documents**.
+- Identified and extracted **specific tables from PDF files**.
+- Worked with **OpenStreetMap's Nominatim API** to obtain geolocation data.
+- Created **structured API requests** to retrieve real-world datasets.
+- Stored collected data into **Pandas DataFrames** for analysis.
+- Performed **data cleaning and preprocessing** on scraped datasets.
+- Understood **ethical web scraping practices**, including respecting rate limits and responsible data collection.
+
+---
+
+##  Week 5 Highlights
+
+- Studied **data preparation and preprocessing techniques** for improving dataset quality.
+- Cleaned datasets using **Microsoft Excel tools** such as Find & Replace, Trim, and formatting options.
+- Identified and removed **blank rows and duplicate records** from datasets.
+- Converted **raw text data into structured columns** using Excel’s **Text to Columns** feature.
+- Worked with **different delimiters** (commas, hyphens, parentheses) while splitting data.
+- Used **VS Code text editor** for quick data editing with **multi-cursor selection**.
+- Sorted datasets and removed duplicates using **editor commands**.
+- Performed **entity resolution and clustering** using **OpenRefine**.
+- Detected **inconsistent entries and standardized similar values**.
+- Generated **automated data profiling reports** using **Python Pandas Profiling**.
+- Analyzed datasets by identifying **missing values, correlations, distributions, and outliers**.
+- Retrieved data from **JSON APIs using Python scripts**.
+- Parsed JSON responses and **organized results programmatically**.
+- Automated **image processing tasks** using the **Pillow library in Python**.
+- Performed **batch image operations** such as resizing, rotation, filtering, and format conversion.
+- Used **FFMPEG for multimedia processing**, including media format conversion and transformations.
+- Learned **command-line workflows for efficient multimedia processing**
 
 ## 🔄 Weekly Update Log
 | Week | What I Learned |
-| Week   | Summary |
-|--------|---------|
+| Week | Summary |
+|------|---------|
 | Week 1 | Focused on setting up a Linux-based development environment using WSL, along with learning essential commands, file navigation, and tools like Git, GitHub, VS Code, pyenv, and UV. Also explored basic Git workflows, API key usage, and LLM CLI tools, building a strong foundation in development and command-line operations. |
 | Week 2 | Covered backend development using FastAPI, including API creation with GET/POST methods, request handling, validation with Pydantic, and testing using Swagger and curl. Also introduced environment management, Docker-based deployment, serverless constraints, and deploying applications on Hugging Face Spaces. |
-| Week 3 | Introduced LLM concepts and API interaction, including OpenAI Chat Completion structure, role-based messaging, and conversation handling. Explored embeddings, cosine similarity, vector databases, RAG, and multimodal inputs, along with structured outputs using function calling. |
+| Week 3 | Introduced LLM concepts and API interaction, including OpenAI Chat Completion structure, role-based messaging, and conversation handling. Explored embeddings, cosine similarity, vector databases, Retrieval-Augmented Generation (RAG), and multimodal inputs, along with structured outputs using function calling. |
+| Week 4 | Learned the fundamentals of web scraping including understanding HTML structures (tags, classes, IDs) and extracting website data using Python libraries like Requests and BeautifulSoup. Practiced parsing and cleaning HTML content, scraping structured data such as tables, handling pagination, and extracting data from PDFs. Also worked with OpenStreetMap’s Nominatim API for geolocation data and learned how to store and clean scraped data using Pandas while following ethical scraping practices and rate limits. |
+| Week 5 | Focused on data preparation and preprocessing techniques. Learned dataset cleaning using Excel (Find & Replace, Trim, removing blanks and duplicates) and Text-to-Columns for structuring raw data. Practiced quick dataset editing in VS Code, entity resolution using OpenRefine, and dataset analysis using Pandas Profiling. Also explored working with JSON APIs in Python, automated image manipulation with Pillow, and multimedia processing workflows using FFMPEG. |
 
 
 
