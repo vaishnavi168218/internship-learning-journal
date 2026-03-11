@@ -19,3 +19,35 @@
 9. Additional analytical methods such as regression analysis, time-series analysis, or causal modeling would be required to determine whether vaccinations had a significant impact on reducing deaths.
 
 10. Overall, correlation analysis combined with scatter plot visualization is a useful exploratory data analysis technique for identifying patterns, relationships, and potential trends in datasets before conducting deeper statistical investigations.
+
+----
+
+## Regression Analysis using Excel
+
+1. Multiple Linear Regression helps analyze the relationship between one dependent variable and multiple independent variables.
+
+2. In this analysis, **new deaths** were considered the dependent variable, while **new cases, new tests, new vaccinations (per 1000), and stringency index** were used as independent variables.
+
+3. Converting variables such as new cases, tests, and vaccinations into **per 1000 values** makes the regression results easier to interpret.
+
+4. The **Adjusted R² value of 0.816** indicates that about **81% of the variation in new deaths** is explained by the independent variables in the model.
+
+5. The **Significance F value is less than 0.05**, which means the regression model is statistically significant and fits the data well.
+
+6. The **P-values** help determine whether each independent variable significantly affects the dependent variable.
+
+7. The variables **new cases, new tests, and new vaccinations** have P-values below 0.05, meaning they significantly influence the number of deaths.
+
+8. The **stringency index has a P-value greater than 0.05**, indicating it is not statistically significant in this model.
+
+9. The regression coefficient for **new cases is positive**, showing that an increase in cases is associated with an increase in deaths.
+
+10. The coefficient for **new tests is also positive**, suggesting that higher testing levels may correspond with more detected deaths.
+
+11. The coefficient for **new vaccinations is negative**, indicating that increasing vaccinations may slightly reduce deaths, although the effect is small.
+
+12. The positive coefficient for the **stringency index appears counterintuitive**, but since it is not statistically significant, it should not be included in the final model.
+
+13. Regression analysis helps identify relationships and potential impacts of different variables on COVID-19 deaths.
+
+14. The results provide useful insights but require **further analysis** to draw strong conclusions about causation.
