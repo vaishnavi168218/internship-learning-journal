@@ -1,7 +1,7 @@
 # Internship Learning Journal  
 Name                 : Vaishnavi Deshpande  
 USN                  : 2BL22CI061  
-GitHub Username      : 13VaishnaviDeshpande 
+GitHub Username      : 13VaishnaviDeshpande
 Department           : CSE-AIML  
 Internship Start Date: 03-02-2026  
 ---
