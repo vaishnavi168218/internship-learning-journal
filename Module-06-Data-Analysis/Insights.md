@@ -112,3 +112,26 @@ Exploratory Data Analysis revealed several important patterns, relationships, an
 - Duplicate records were minimal or removed during preprocessing.
 - Overall data quality was sufficient for further analysis.
 
+-----
+
+# Key Insights — Forecasting Dataset
+
+1. A strong positive linear relationship exists between height and weight, indicating that taller individuals generally tend to weigh more.
+
+2. The height–weight dataset is well-suited for linear regression because the data points follow an approximately straight-line pattern.
+
+3. Predictions using FORECAST or FORECAST.LINEAR provide reasonable estimates for physical measurements due to the stable relationship between variables.
+
+4. The TREND function efficiently generates multiple predictions at once, making it suitable for forecasting across a range of input values.
+
+5. The traffic dataset shows high variability with sharp peaks and drops, indicating dynamic real-world behavior.
+
+6. Clear seasonal patterns are present in traffic data, including daily cycles and weekly variations such as reduced weekend traffic.
+
+7. Linear forecasting performs poorly on cyclical datasets because it assumes a constant rate of change and cannot capture repeating patterns.
+
+8. FORECAST.ETS provides better predictions for time-series data as it accounts for trend and seasonality using exponential smoothing.
+
+9. Holiday periods and special events significantly influence traffic volume, producing noticeable deviations from regular patterns.
+
+10. The effectiveness of forecasting depends heavily on selecting a method that matches the underlying data characteristics.
