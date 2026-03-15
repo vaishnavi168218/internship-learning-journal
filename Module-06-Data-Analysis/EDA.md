@@ -405,3 +405,135 @@ EDA helps identify:
 
 These insights guide the selection of features for modeling and improve predictive accuracy.
 ----
+# Exploratory Data Analysis (EDA) — Forecasting Dataset
+
+## Dataset Overview
+
+Two datasets were analyzed:
+
+1. Heights and Weights Dataset
+   - Contains physical measurements of individuals
+   - Variables: Height (inches), Weight (pounds)
+   - Sample size used: ~1,000 records
+   - Converted to metric units: centimeters and kilograms
+
+2. Traffic Time-Series Dataset
+   - Contains hourly vehicle counts at road junctions
+   - Variables: Date/Time, Number of Vehicles
+   - Used to study temporal patterns and seasonality
+
+---
+
+## Data Preparation
+
+- Height converted from inches to centimeters using:
+  Height (cm) = Inches × 2.54
+- Weight converted from pounds to kilograms using:
+  Weight (kg) = Pounds ÷ 2.204
+- Decimal precision reduced for readability
+- Data formatted for visualization and analysis
+
+---
+
+## Univariate Analysis
+
+### Heights and Weights Dataset
+
+- Heights ranged approximately from 160 cm to 185 cm
+- Weights ranged approximately from 50 kg to 65 kg
+- Values showed moderate spread with no extreme anomalies
+- Distributions appeared roughly continuous
+
+### Traffic Dataset
+
+- Vehicle counts varied significantly across time
+- Data showed high variability with sharp peaks and troughs
+- Indicates non-uniform distribution
+
+---
+
+## Bivariate Analysis
+
+### Height vs Weight Relationship
+
+- Scatter plot revealed a strong positive relationship
+- As height increases, weight also increases
+- Relationship appears approximately linear
+- Suitable for linear regression modeling
+
+---
+
+## Correlation Insights
+
+- Positive correlation between height and weight
+- Suggests weight can be predicted from height
+- Supports use of linear forecasting methods
+
+---
+
+## Trend Analysis
+
+### Heights and Weights
+
+- No time component; trend reflects physical relationship
+- Linear increase observed between variables
+
+### Traffic Dataset
+
+- Clear temporal patterns observed
+- Daily cycles (peak and low traffic hours)
+- Weekly patterns (weekday vs weekend differences)
+- Holiday effects causing unusually low traffic
+
+---
+
+## Seasonality Detection
+
+Traffic data exhibited strong seasonal behavior:
+
+- Repeating patterns every 24 hours (daily cycle)
+- Weekly periodic patterns
+- Event-driven fluctuations (holidays)
+
+Linear models fail to capture these repeating patterns.
+
+---
+
+## Outlier Analysis
+
+### Heights and Weights
+
+- No major outliers observed in the sample
+- Data appears relatively consistent
+
+### Traffic Dataset
+
+- Occasional unusually high or low vehicle counts
+- May correspond to accidents, events, or holidays
+
+---
+
+## Model Suitability Insights
+
+- Linear regression suitable for height–weight prediction
+- Linear forecasting ineffective for cyclical traffic data
+- Time-series methods required for seasonal datasets
+
+---
+
+## Visualization Insights
+
+- Scatter plot effectively revealed linear relationships
+- Line charts exposed temporal fluctuations in traffic data
+- Comparison plots showed differences between actual and predicted values
+
+---
+
+## Key Findings
+
+- Physical measurement data shows stable linear relationships
+- Time-series data exhibits strong seasonality and variability
+- Choice of forecasting method must match data characteristics
+
+---
+
