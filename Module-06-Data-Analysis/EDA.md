@@ -283,3 +283,125 @@ Since multiple predictors are used, the analysis will use **Multiple Linear Regr
 
 ---
 
+# Exploratory Data Analysis (EDA)
+
+Exploratory Data Analysis (EDA) is the process of examining datasets to understand their structure, characteristics, patterns, and potential issues before applying statistical models or machine learning techniques.
+
+EDA helps in identifying trends, relationships, anomalies, missing values, and data quality problems.
+
+## Objectives of EDA
+
+- Understand the overall structure of the dataset
+- Identify important variables and their distributions
+- Detect missing values and inconsistencies
+- Discover relationships between variables
+- Identify outliers and anomalies
+- Generate insights for feature selection and modeling
+
+## Data Inspection
+
+Initial exploration includes examining dataset size, column names, and data types.
+
+Typical steps:
+
+- View first and last few records
+- Check number of rows and columns
+- Inspect data types (numeric, categorical, date/time)
+- Verify data consistency
+
+## Data Cleaning
+
+Data cleaning ensures accuracy and reliability of analysis.
+
+Key tasks:
+
+- Handling missing values (removal or imputation)
+- Removing duplicate records
+- Correcting inconsistent entries
+- Converting data types where necessary
+- Standardizing formats
+
+## Univariate Analysis
+
+Univariate analysis examines each variable independently.
+
+For numerical variables:
+
+- Mean, median, mode
+- Standard deviation and variance
+- Minimum and maximum values
+- Distribution shape (normal, skewed)
+
+For categorical variables:
+
+- Frequency counts
+- Category proportions
+
+Visualization methods:
+
+- Histograms
+- Bar charts
+- Box plots
+
+## Bivariate Analysis
+
+Bivariate analysis studies relationships between two variables.
+
+Techniques include:
+
+- Scatter plots for numeric variables
+- Correlation analysis
+- Cross-tabulation for categorical variables
+- Comparison of group statistics
+
+Correlation coefficients indicate strength and direction of relationships.
+
+## Multivariate Analysis
+
+Multivariate analysis explores interactions among multiple variables simultaneously.
+
+Common methods:
+
+- Correlation matrices
+- Pair plots
+- Dimensionality reduction techniques
+- Clustering analysis
+
+This helps uncover complex patterns not visible in simpler analyses.
+
+## Outlier Detection
+
+Outliers are extreme values that differ significantly from other observations.
+
+Detection methods:
+
+- Interquartile Range (IQR) method
+- Z-score method
+- Box plots
+- Visual inspection
+
+Handling outliers improves model performance and prevents misleading conclusions.
+
+## Data Visualization
+
+Visualization is a key component of EDA because it reveals patterns that may not be apparent from numerical summaries.
+
+Common visualization techniques:
+
+- Line charts for trends over time
+- Scatter plots for relationships
+- Heatmaps for correlation analysis
+- Box plots for distribution comparison
+- Pie charts for categorical proportions
+
+## Insights and Feature Selection
+
+EDA helps identify:
+
+- Important predictors
+- Redundant variables
+- Potential transformations
+- Data preparation requirements
+
+These insights guide the selection of features for modeling and improve predictive accuracy.
+----
